@@ -25,6 +25,9 @@ def main():
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
     asteroid_field_instance = AsteroidField()
+    # In your initialization code
+    shots = pygame.sprite.Group()
+    shots.containers = (updatable,drawable)
 
 
     while running:
@@ -38,18 +41,25 @@ def main():
             if player.collisions(asteroid):
                 print("Game over!")
                 sys.exit()
+        for sprite in updatable:
+            sprite.update(dt)
 
-                
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_SPACE]:
+            new_shot = player.shoot()
+            shots.add(new_shot)
+            updatable.add(new_shot)
+            drawable.add(new_shot) 
+            
 
-        screen.fill(BLACK)
-        for draw in drawable:
-            draw.draw(screen)
+        screen.fill(BLACK)  # Clear screen FIRST
+        for sprite in drawable: 
+            sprite.draw(screen)
         pygame.display.flip()
     
 
 if __name__ == "__main__":
-    main()
-
+    main()                     
 
 
 
