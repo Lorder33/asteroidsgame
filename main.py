@@ -47,12 +47,13 @@ def main():
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE]:
             new_shot = player.shoot()
-            shots.add(new_shot)
-            updatable.add(new_shot)
-            drawable.add(new_shot) 
+            if new_shot != None:
+                shots.add(new_shot)
+                updatable.add(new_shot)
+                drawable.add(new_shot) 
             
 
-        screen.fill(BLACK)  # Clear screen FIRST
+        screen.fill(BLACK) 
         for sprite in drawable: 
             sprite.draw(screen)
         pygame.display.flip()
