@@ -25,7 +25,6 @@ def main():
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
     asteroid_field_instance = AsteroidField()
-    # In your initialization code
     shots = pygame.sprite.Group()
     shots.containers = (updatable,drawable)
 
@@ -44,7 +43,7 @@ def main():
             for shot in shots:
                 if shot.collisions(asteroid):
                     shot.kill()
-                    asteroid.kill()
+                    asteroid.split()
         for sprite in updatable:
             sprite.update(dt)
 
